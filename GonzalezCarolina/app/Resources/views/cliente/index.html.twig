@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Identifiquese</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cedula</th>
+                <th>Fechana</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cliente in clientes %}
+            <tr>
+                <td><a href="{{ path('restaurante_cliente_show', { 'id': cliente.id }) }}">{{ cliente.id }}</a></td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.cedula }}</td>
+                <td>{% if cliente.fechaNa %}{{ cliente.fechaNa|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('restaurante_plato_index', { 'id': cliente.id }) }}">SELECCIONAR</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('restaurante_cliente_new') }}">Create a new cliente</a>
+        </li>
+    </ul>
+{% endblock %}
